@@ -33,6 +33,14 @@ class PPOMemory:
                batches
 
     def store_memory(self, state, action, probs, vals, reward, done):
+        '''if len(self.states) > 6000:
+            print('clear memory')
+            self.states = self.states[-2000:]
+            self.actions = self.actions[-2000:]
+            self.probs = self.probs[-2000:]
+            self.vals = self.vals[-2000:]
+            self.rewards = self.rewards[-2000:]
+            self.dones = self.dones[-2000:]'''
         self.states.append(state)
         self.actions.append(action)
         self.probs.append(probs)
@@ -41,6 +49,7 @@ class PPOMemory:
         self.dones.append(done)
 
     def clear_memory(self):
+        print('clear memory')
         self.states = []
         self.probs = []
         self.actions = []
@@ -51,7 +60,7 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
     def __init__(self, n_actions, input_dims, alpha,
-                 fc1_dims=60, fc2_dims=60, location='tmp/ppo'):
+                 fc1_dims=128, fc2_dims=128, location='tmp/ppo'): # Standard sind 2 * 60 Neuronen
         super(ActorNetwork, self).__init__()
 
         if not os.path.exists(location):
@@ -84,7 +93,7 @@ class ActorNetwork(nn.Module):
 
 
 class CriticNetwork(nn.Module):
-    def __init__(self, input_dims, alpha, fc1_dims=60, fc2_dims=60, location='tmp/ppo'):
+    def __init__(self, input_dims, alpha, fc1_dims=128, fc2_dims=128, location='tmp/ppo'):# Standard sind 2 * 60 Neuronen
         super(CriticNetwork, self).__init__()
 
         if not os.path.exists(location):
@@ -116,7 +125,7 @@ class CriticNetwork(nn.Module):
 
 class PPOAgent:
     def __init__(self, n_actions, input_dims, env=None, gamma=0.99, alpha=0.0003, gae_lambda=0.95,
-                 policy_clip=0.2, batch_size=64, n_epochs=10, speicherort='tmp/ppo'):
+                 policy_clip=0.1, batch_size=64, n_epochs=10, speicherort='tmp/ppo'):
         self.gamma = gamma
         self.policy_clip = policy_clip
         self.n_epochs = n_epochs
@@ -202,4 +211,4 @@ class PPOAgent:
                 self.actor.optimizer.step()
                 self.critic.optimizer.step()
 
-        self.memory.clear_memory()
+        #self.memory.clear_memory()

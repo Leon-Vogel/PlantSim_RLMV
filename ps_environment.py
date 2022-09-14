@@ -77,7 +77,7 @@ class PlantSimulationProblem(Problem):
         :return:
         """
         while not self.plantsim.get_value("ready"):
-            sleep(0.00001)
+            sleep(0.01)
             print("sleep")
         if self.next_event:
             self.state = []

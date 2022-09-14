@@ -46,8 +46,8 @@ class DuelingDeepQNetwork(nn.Module):
         self.checkpoint_dir = chkpt_dir
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name)
 
-        self.fc1 = nn.Linear(*input_dims, 64)
-        self.fc2 = nn.Linear(64, 64)
+        self.fc1 = nn.Linear(*input_dims, 128)  # 64
+        self.fc2 = nn.Linear(128, 64)
         self.V = nn.Linear(64, 1)
         self.A = nn.Linear(64, n_actions)
 
@@ -94,12 +94,12 @@ class Agent():
 
         self.q_eval = DuelingDeepQNetwork(self.lr, self.n_actions,
                                           input_dims=self.input_dims,
-                                          name='lunar_lander_dueling_ddqn_q_eval',
+                                          name='MV_dueling_ddqn_q_eval',
                                           chkpt_dir=self.chkpt_dir)
 
         self.q_next = DuelingDeepQNetwork(self.lr, self.n_actions,
                                           input_dims=self.input_dims,
-                                          name='lunar_lander_dueling_ddqn_q_next',
+                                          name='MV_dueling_ddqn_q_next',
                                           chkpt_dir=self.chkpt_dir)
 
     def choose_action(self, observation):
