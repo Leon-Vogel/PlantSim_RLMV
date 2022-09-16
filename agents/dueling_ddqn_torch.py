@@ -46,8 +46,8 @@ class DuelingDeepQNetwork(nn.Module):
         self.checkpoint_dir = chkpt_dir
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name)
 
-        self.fc1 = nn.Linear(*input_dims, 128)  # 64
-        self.fc2 = nn.Linear(128, 64)
+        self.fc1 = nn.Linear(*input_dims, 64)  # 64
+        self.fc2 = nn.Linear(64, 64)
         self.V = nn.Linear(64, 1)
         self.A = nn.Linear(64, n_actions)
 
@@ -87,6 +87,9 @@ class Agent():
         self.eps_dec = eps_dec
         self.replace_target_cnt = replace
         self.chkpt_dir = chkpt_dir
+        if not os.path.exists(self.chkpt_dir):
+            os.makedirs(self.chkpt_dir)
+
         self.action_space = [i for i in range(self.n_actions)]
         self.learn_step_counter = 0
 
@@ -122,8 +125,15 @@ class Agent():
             self.q_next.load_state_dict(self.q_eval.state_dict())
 
     def decrement_epsilon(self):
+        '''self.epsilon = self.epsilon - self.eps_dec \
+            if self.epsilon > self.eps_min else self.eps_min'''
+        #if self.epsilon > -1.5:
         self.epsilon = self.epsilon - self.eps_dec \
             if self.epsilon > self.eps_min else self.eps_min
+
+        '''else:
+            self.epsilon = self.epsilon * self.eps_dec \
+                if self.epsilon > self.eps_min else self.eps_min'''
 
     def save_models(self):
         self.q_eval.save_checkpoint()
@@ -134,6 +144,7 @@ class Agent():
         self.q_next.load_checkpoint()
 
     def learn(self):
+        # print('-------learning-------')
         if self.memory.mem_cntr < self.batch_size:
             return
 

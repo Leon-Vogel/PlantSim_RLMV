@@ -15,33 +15,37 @@ pfad = 'C:\\Users\leonv\Documents\Programmierungen_Studium\PlantSimulationRL\sim
 
 # model = pfad + '\Methodenvergleich_20220911_mitLager.spp'
 # model = pfad + '\Methodenvergleich_20220913_real.spp'
-model = pfad + '\Methodenvergleich_20220915_real_mitTyp.spp'
+# model = pfad + '\Methodenvergleich_20220915_Naiver_reward_wenig_states.spp'
+# model = pfad + '\Methodenvergleich_20220915_Naiver_reward.spp'
+model = pfad + '\Methodenvergleich_20220916_Naiver_reward_wenig_states.spp'
 
 if __name__ == '__main__':
     plantsim = Plantsim(version='22.1', license_type='Educational', path_context='.Modelle.Modell', model=model,
                         socket=None, visible=False)
     env = Environment(plantsim)
-    num_games = 350
-    load_checkpoint = True  # FalseTrue
+    num_games = 300
+    load_checkpoint = True  # False True
 
     actions = env.problem.get_all_actions()
     observation = env.reset()
     env.problem.plantsim.execute_simtalk("GetCurrentState")
     env.problem.get_current_state()
     test = env.problem.state
+    decay = (1+0.1)/(350*num_games)
 
-    agent = Agent(gamma=0.99, epsilon=1.0, lr=0.0003,  # 5e-4,
-                  input_dims=[len(test)], n_actions=len(actions), mem_size=100000, eps_min=0.01,
-                  batch_size=128, eps_dec=1e-5, replace=1000)
+    agent = Agent(gamma=0.99, epsilon=1.0, lr=0.0005,  # 5e-4,
+                  input_dims=[len(test)], n_actions=len(actions), mem_size=50000, eps_min=0.00001,
+                  batch_size=512, eps_dec=decay, replace=30,
+                  chkpt_dir='tmp/dueling_ddqn_very_naive_few_states_2')  # eps_dec=2e-5 eps_dec=0.99993
 
     if load_checkpoint:
         agent.load_models()
 
-    filename = 'tmp\Dueling-DDQN-MV_14.png'
+    filename = 'tmp\Dueling-DDQN-MV_16_wenig_states.png'
     scores = []
     eps_history = []
     n_steps = 0
-    best_score = 271.424
+    best_score = 101  # 107 # 420  # 271.424
 
     for i in range(num_games):
         if i > 0:
@@ -67,8 +71,8 @@ if __name__ == '__main__':
                 count += 1
             score += reward
             done = env.problem.is_goal_state(current_state)
-           # print("Step " + str(step) + ": " + a + " - Reward: " + str(reward) + " - finished: " + str(
-           #     count - 1) + "\n")  # + " - " + str(round((step / count), 3)) +
+            # print("Step " + str(step) + ": " + a + " - Reward: " + str(reward) + " - finished: " + str(
+            #     count - 1) + "\n")  # + " - " + str(round((step / count), 3)) +
 
             agent.store_transition(observation, action,
                                    reward, observation_, int(done))
@@ -77,7 +81,7 @@ if __name__ == '__main__':
             observation = observation_
         scores.append(score)
         avg_score = np.mean(scores[max(0, i - 100):(i + 1)])
-        if score > best_score:
+        if score > best_score and agent.epsilon < 0.9:
             agent.save_models()
             best_score = score
 
@@ -85,8 +89,12 @@ if __name__ == '__main__':
         print('episode: ', i, ' -- score %.1f ' % score,
               ' -- average score %.1f' % avg_score,
               ' -- best score %.1f' % best_score,
-              'epsilon %.4f' % agent.epsilon)
+              'epsilon %.5f' % agent.epsilon)
         # if i > 0 and i % 10 == 0:
 
     x = [i + 1 for i in range(num_games)]
     plotLearning(x, scores, eps_history, filename)
+    with open("tmp\dddq_performance_train_16_scores.txt", "w") as output:
+        output.write(str(scores))
+    with open("tmp\dddq_performance_train_16_epsilon.txt", "w") as output:
+        output.write(str(eps_history))

@@ -60,7 +60,7 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
     def __init__(self, n_actions, input_dims, alpha,
-                 fc1_dims=128, fc2_dims=128, location='tmp/ppo'): # Standard sind 2 * 60 Neuronen
+                 fc1_dims=128, fc2_dims=64, location='tmp/ppo'): # Standard sind 2 * 60 Neuronen
         super(ActorNetwork, self).__init__()
 
         if not os.path.exists(location):
@@ -93,7 +93,7 @@ class ActorNetwork(nn.Module):
 
 
 class CriticNetwork(nn.Module):
-    def __init__(self, input_dims, alpha, fc1_dims=128, fc2_dims=128, location='tmp/ppo'):# Standard sind 2 * 60 Neuronen
+    def __init__(self, input_dims, alpha, fc1_dims=128, fc2_dims=64, location='tmp/ppo'):# Standard sind 2 * 60 Neuronen
         super(CriticNetwork, self).__init__()
 
         if not os.path.exists(location):
@@ -125,7 +125,7 @@ class CriticNetwork(nn.Module):
 
 class PPOAgent:
     def __init__(self, n_actions, input_dims, env=None, gamma=0.99, alpha=0.0003, gae_lambda=0.95,
-                 policy_clip=0.1, batch_size=64, n_epochs=10, speicherort='tmp/ppo'):
+                 policy_clip=0.15, batch_size=64, n_epochs=10, speicherort='tmp/ppo'):
         self.gamma = gamma
         self.policy_clip = policy_clip
         self.n_epochs = n_epochs
@@ -211,4 +211,4 @@ class PPOAgent:
                 self.actor.optimizer.step()
                 self.critic.optimizer.step()
 
-        #self.memory.clear_memory()
+        self.memory.clear_memory()

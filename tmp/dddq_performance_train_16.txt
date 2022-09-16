@@ -1,0 +1,209 @@
+episode:  0  -- score 41.0   -- average score 41.0  -- best score 79.0 epsilon 0.99628
+sleep
+episode:  1  -- score 36.0   -- average score 38.5  -- best score 79.0 epsilon 0.99160
+sleep
+sleep
+episode:  2  -- score 38.0   -- average score 38.3  -- best score 79.0 epsilon 0.98697
+sleep
+sleep
+episode:  3  -- score 39.0   -- average score 38.5  -- best score 79.0 epsilon 0.98235
+sleep
+episode:  4  -- score 38.0   -- average score 38.4  -- best score 79.0 epsilon 0.97768
+sleep
+episode:  5  -- score 47.0   -- average score 39.8  -- best score 79.0 epsilon 0.97293
+sleep
+episode:  6  -- score 30.0   -- average score 38.4  -- best score 79.0 epsilon 0.96831
+sleep
+episode:  7  -- score 34.0   -- average score 37.9  -- best score 79.0 epsilon 0.96364
+episode:  8  -- score 31.0   -- average score 37.1  -- best score 79.0 epsilon 0.95898
+sleep
+episode:  9  -- score 41.0   -- average score 37.5  -- best score 79.0 epsilon 0.95424
+episode:  10  -- score 47.0   -- average score 38.4  -- best score 79.0 epsilon 0.94953
+episode:  11  -- score 38.0   -- average score 38.3  -- best score 79.0 epsilon 0.94483
+sleep
+episode:  12  -- score 42.0   -- average score 38.6  -- best score 79.0 epsilon 0.94014
+sleep
+episode:  13  -- score 34.0   -- average score 38.3  -- best score 79.0 epsilon 0.93549
+sleep
+sleep
+episode:  14  -- score 34.0   -- average score 38.0  -- best score 79.0 epsilon 0.93085
+sleep
+episode:  15  -- score 43.0   -- average score 38.3  -- best score 79.0 epsilon 0.92614
+episode:  16  -- score 39.0   -- average score 38.4  -- best score 79.0 epsilon 0.92139
+sleep
+episode:  17  -- score 42.0   -- average score 38.6  -- best score 79.0 epsilon 0.91665
+sleep
+episode:  18  -- score 44.0   -- average score 38.8  -- best score 79.0 epsilon 0.91194
+sleep
+episode:  19  -- score 59.0   -- average score 39.9  -- best score 79.0 epsilon 0.90723
+sleep
+episode:  20  -- score 39.0   -- average score 39.8  -- best score 79.0 epsilon 0.90256
+episode:  21  -- score 49.0   -- average score 40.2  -- best score 79.0 epsilon 0.89787
+episode:  22  -- score 50.0   -- average score 40.7  -- best score 79.0 epsilon 0.89317
+episode:  23  -- score 48.0   -- average score 41.0  -- best score 79.0 epsilon 0.88845
+episode:  24  -- score 44.0   -- average score 41.1  -- best score 79.0 epsilon 0.88377
+episode:  25  -- score 42.0   -- average score 41.1  -- best score 79.0 epsilon 0.87909
+episode:  26  -- score 38.0   -- average score 41.0  -- best score 79.0 epsilon 0.87439
+episode:  27  -- score 39.0   -- average score 40.9  -- best score 79.0 epsilon 0.86965
+episode:  28  -- score 41.0   -- average score 40.9  -- best score 79.0 epsilon 0.86493
+episode:  29  -- score 63.0   -- average score 41.7  -- best score 79.0 epsilon 0.86026
+sleep
+sleep
+episode:  30  -- score 42.0   -- average score 41.7  -- best score 79.0 epsilon 0.85549
+episode:  31  -- score 41.0   -- average score 41.7  -- best score 79.0 epsilon 0.85072
+episode:  32  -- score 40.0   -- average score 41.6  -- best score 79.0 epsilon 0.84606
+sleep
+episode:  33  -- score 41.0   -- average score 41.6  -- best score 79.0 epsilon 0.84133
+sleep
+episode:  34  -- score 40.0   -- average score 41.5  -- best score 79.0 epsilon 0.83662
+episode:  35  -- score 51.0   -- average score 41.8  -- best score 79.0 epsilon 0.83197
+episode:  36  -- score 41.0   -- average score 41.8  -- best score 79.0 epsilon 0.82735
+sleep
+episode:  37  -- score 50.0   -- average score 42.0  -- best score 79.0 epsilon 0.82267
+episode:  38  -- score 50.0   -- average score 42.2  -- best score 79.0 epsilon 0.81792
+episode:  39  -- score 38.0   -- average score 42.1  -- best score 79.0 epsilon 0.81328
+episode:  40  -- score 44.0   -- average score 42.1  -- best score 79.0 epsilon 0.80857
+sleep
+sleep
+sleep
+episode:  41  -- score 53.0   -- average score 42.4  -- best score 79.0 epsilon 0.80386
+episode:  42  -- score 52.0   -- average score 42.6  -- best score 79.0 epsilon 0.79921
+sleep
+episode:  43  -- score 44.0   -- average score 42.7  -- best score 79.0 epsilon 0.79450
+episode:  44  -- score 44.0   -- average score 42.7  -- best score 79.0 epsilon 0.78987
+episode:  45  -- score 50.0   -- average score 42.8  -- best score 79.0 epsilon 0.78522
+episode:  46  -- score 44.0   -- average score 42.9  -- best score 79.0 epsilon 0.78052
+episode:  47  -- score 47.0   -- average score 43.0  -- best score 79.0 epsilon 0.77586
+episode:  48  -- score 51.0   -- average score 43.1  -- best score 79.0 epsilon 0.77122
+episode:  49  -- score 36.0   -- average score 43.0  -- best score 79.0 epsilon 0.76650
+episode:  50  -- score 40.0   -- average score 42.9  -- best score 79.0 epsilon 0.76174
+episode:  51  -- score 53.0   -- average score 43.1  -- best score 79.0 epsilon 0.75702
+episode:  52  -- score 47.0   -- average score 43.2  -- best score 79.0 epsilon 0.75237
+episode:  53  -- score 61.0   -- average score 43.5  -- best score 79.0 epsilon 0.74767
+episode:  54  -- score 36.0   -- average score 43.4  -- best score 79.0 epsilon 0.74302
+episode:  55  -- score 50.0   -- average score 43.5  -- best score 79.0 epsilon 0.73833
+episode:  56  -- score 48.0   -- average score 43.6  -- best score 79.0 epsilon 0.73365
+episode:  57  -- score 46.0   -- average score 43.6  -- best score 79.0 epsilon 0.72898
+episode:  58  -- score 54.0   -- average score 43.8  -- best score 79.0 epsilon 0.72432
+episode:  59  -- score 52.0   -- average score 43.9  -- best score 79.0 epsilon 0.71961
+episode:  60  -- score 52.0   -- average score 44.1  -- best score 79.0 epsilon 0.71496
+episode:  61  -- score 45.0   -- average score 44.1  -- best score 79.0 epsilon 0.71032
+episode:  62  -- score 45.0   -- average score 44.1  -- best score 79.0 epsilon 0.70567
+episode:  63  -- score 49.0   -- average score 44.2  -- best score 79.0 epsilon 0.70096
+episode:  64  -- score 46.0   -- average score 44.2  -- best score 79.0 epsilon 0.69627
+episode:  65  -- score 58.0   -- average score 44.4  -- best score 79.0 epsilon 0.69156
+episode:  66  -- score 50.0   -- average score 44.5  -- best score 79.0 epsilon 0.68685
+episode:  67  -- score 61.0   -- average score 44.7  -- best score 79.0 epsilon 0.68220
+episode:  68  -- score 51.0   -- average score 44.8  -- best score 79.0 epsilon 0.67752
+episode:  69  -- score 59.0   -- average score 45.0  -- best score 79.0 epsilon 0.67279
+episode:  70  -- score 49.0   -- average score 45.1  -- best score 79.0 epsilon 0.66814
+episode:  71  -- score 50.0   -- average score 45.2  -- best score 79.0 epsilon 0.66349
+episode:  72  -- score 45.0   -- average score 45.2  -- best score 79.0 epsilon 0.65878
+sleep
+episode:  73  -- score 57.0   -- average score 45.3  -- best score 79.0 epsilon 0.65410
+episode:  74  -- score 53.0   -- average score 45.4  -- best score 79.0 epsilon 0.64942
+episode:  75  -- score 58.0   -- average score 45.6  -- best score 79.0 epsilon 0.64473
+episode:  76  -- score 62.0   -- average score 45.8  -- best score 79.0 epsilon 0.64003
+episode:  77  -- score 67.0   -- average score 46.1  -- best score 79.0 epsilon 0.63523
+episode:  78  -- score 62.0   -- average score 46.3  -- best score 79.0 epsilon 0.63045
+episode:  79  -- score 63.0   -- average score 46.5  -- best score 79.0 epsilon 0.62580
+episode:  80  -- score 61.0   -- average score 46.7  -- best score 79.0 epsilon 0.62113
+sleep
+episode:  81  -- score 41.0   -- average score 46.6  -- best score 79.0 epsilon 0.61644
+episode:  82  -- score 52.0   -- average score 46.7  -- best score 79.0 epsilon 0.61171
+episode:  83  -- score 69.0   -- average score 46.9  -- best score 79.0 epsilon 0.60702
+episode:  84  -- score 72.0   -- average score 47.2  -- best score 79.0 epsilon 0.60226
+episode:  85  -- score 51.0   -- average score 47.3  -- best score 79.0 epsilon 0.59758
+episode:  86  -- score 77.0   -- average score 47.6  -- best score 79.0 epsilon 0.59292
+episode:  87  -- score 52.0   -- average score 47.6  -- best score 79.0 epsilon 0.58818
+episode:  88  -- score 51.0   -- average score 47.7  -- best score 79.0 epsilon 0.58351
+sleep
+episode:  89  -- score 44.0   -- average score 47.6  -- best score 79.0 epsilon 0.57888
+episode:  90  -- score 58.0   -- average score 47.8  -- best score 79.0 epsilon 0.57424
+episode:  91  -- score 51.0   -- average score 47.8  -- best score 79.0 epsilon 0.56955
+episode:  92  -- score 73.0   -- average score 48.1  -- best score 79.0 epsilon 0.56488
+sleep
+episode:  93  -- score 63.0   -- average score 48.2  -- best score 79.0 epsilon 0.56020
+episode:  94  -- score 60.0   -- average score 48.3  -- best score 79.0 epsilon 0.55546
+episode:  95  -- score 65.0   -- average score 48.5  -- best score 79.0 epsilon 0.55074
+episode:  96  -- score 65.0   -- average score 48.7  -- best score 79.0 epsilon 0.54606
+episode:  97  -- score 63.0   -- average score 48.8  -- best score 79.0 epsilon 0.54130
+episode:  98  -- score 71.0   -- average score 49.1  -- best score 79.0 epsilon 0.53656
+episode:  99  -- score 58.0   -- average score 49.1  -- best score 79.0 epsilon 0.53187
+episode:  100  -- score 58.0   -- average score 49.2  -- best score 79.0 epsilon 0.52722
+sleep
+episode:  101  -- score 65.0   -- average score 49.5  -- best score 79.0 epsilon 0.52254
+episode:  102  -- score 65.0   -- average score 49.8  -- best score 79.0 epsilon 0.51783
+episode:  103  -- score 61.0   -- average score 50.0  -- best score 79.0 epsilon 0.51313
+episode:  104  -- score 58.0   -- average score 50.2  -- best score 79.0 epsilon 0.50841
+episode:  105  -- score 74.0   -- average score 50.5  -- best score 79.0 epsilon 0.50376
+episode:  106  -- score 68.0   -- average score 50.7  -- best score 79.0 epsilon 0.49680
+episode:  107  -- score 61.0   -- average score 51.0  -- best score 79.0 epsilon 0.48159
+episode:  108  -- score 64.0   -- average score 51.3  -- best score 79.0 epsilon 0.46675
+episode:  109  -- score 79.0   -- average score 51.8  -- best score 79.0 epsilon 0.45245
+episode:  110  -- score 50.0   -- average score 51.9  -- best score 79.0 epsilon 0.43868
+sleep
+episode:  111  -- score 72.0   -- average score 52.2  -- best score 79.0 epsilon 0.42529
+episode:  112  -- score 57.0   -- average score 52.3  -- best score 79.0 epsilon 0.41235
+episode:  113  -- score 63.0   -- average score 52.6  -- best score 79.0 epsilon 0.39953
+episode:  114  -- score 51.0   -- average score 52.7  -- best score 79.0 epsilon 0.38737
+episode:  115  -- score 54.0   -- average score 52.9  -- best score 79.0 epsilon 0.37539
+episode:  116  -- score 67.0   -- average score 53.2  -- best score 79.0 epsilon 0.36393
+episode:  117  -- score 60.0   -- average score 53.4  -- best score 79.0 epsilon 0.35279
+episode:  118  -- score 44.0   -- average score 53.4  -- best score 79.0 epsilon 0.34209
+episode:  119  -- score 76.0   -- average score 53.7  -- best score 79.0 epsilon 0.33155
+episode:  120  -- score 28.0   -- average score 53.4  -- best score 79.0 epsilon 0.32130
+episode:  121  -- score 10.0   -- average score 53.1  -- best score 79.0 epsilon 0.31152
+episode:  122  -- score 12.0   -- average score 52.7  -- best score 79.0 epsilon 0.30210
+episode:  123  -- score 17.0   -- average score 52.4  -- best score 79.0 epsilon 0.29288
+episode:  124  -- score 11.0   -- average score 52.0  -- best score 79.0 epsilon 0.28377
+episode:  125  -- score 13.0   -- average score 51.7  -- best score 79.0 epsilon 0.27489
+episode:  126  -- score 11.0   -- average score 51.4  -- best score 79.0 epsilon 0.26642
+episode:  127  -- score 7.0   -- average score 51.1  -- best score 79.0 epsilon 0.25813
+episode:  128  -- score 10.0   -- average score 50.8  -- best score 79.0 epsilon 0.25010
+episode:  129  -- score 10.0   -- average score 50.5  -- best score 79.0 epsilon 0.24232
+episode:  130  -- score 10.0   -- average score 50.0  -- best score 79.0 epsilon 0.23494
+episode:  131  -- score 10.0   -- average score 49.7  -- best score 79.0 epsilon 0.22773
+episode:  132  -- score 6.0   -- average score 49.3  -- best score 79.0 epsilon 0.22075
+episode:  133  -- score 12.0   -- average score 49.1  -- best score 79.0 epsilon 0.21399
+episode:  134  -- score 10.0   -- average score 48.8  -- best score 79.0 epsilon 0.20732
+episode:  135  -- score 8.0   -- average score 48.4  -- best score 79.0 epsilon 0.20095
+episode:  136  -- score 5.0   -- average score 48.0  -- best score 79.0 epsilon 0.19479
+episode:  137  -- score 10.0   -- average score 47.7  -- best score 79.0 epsilon 0.18873
+episode:  138  -- score 8.0   -- average score 47.3  -- best score 79.0 epsilon 0.18294
+episode:  139  -- score 11.0   -- average score 46.9  -- best score 79.0 epsilon 0.17726
+episode:  140  -- score 11.0   -- average score 46.6  -- best score 79.0 epsilon 0.17183
+sleep
+episode:  141  -- score 7.0   -- average score 46.2  -- best score 79.0 epsilon 0.16656
+episode:  142  -- score 11.0   -- average score 45.8  -- best score 79.0 epsilon 0.16139
+episode:  143  -- score 6.0   -- average score 45.4  -- best score 79.0 epsilon 0.15640
+episode:  144  -- score 9.0   -- average score 45.0  -- best score 79.0 epsilon 0.15158
+episode:  145  -- score 5.0   -- average score 44.6  -- best score 79.0 epsilon 0.14685
+episode:  146  -- score 11.0   -- average score 44.3  -- best score 79.0 epsilon 0.14227
+episode:  147  -- score 2.0   -- average score 43.8  -- best score 79.0 epsilon 0.13791
+episode:  148  -- score 3.0   -- average score 43.4  -- best score 79.0 epsilon 0.13369
+episode:  149  -- score 9.0   -- average score 43.0  -- best score 79.0 epsilon 0.12960
+episode:  150  -- score 6.0   -- average score 42.7  -- best score 79.0 epsilon 0.12564
+episode:  151  -- score 9.0   -- average score 42.4  -- best score 79.0 epsilon 0.12178
+episode:  152  -- score 4.0   -- average score 41.9  -- best score 79.0 epsilon 0.11804
+episode:  153  -- score 15.0   -- average score 41.6  -- best score 79.0 epsilon 0.11446
+episode:  154  -- score 2.0   -- average score 41.0  -- best score 79.0 epsilon 0.11094
+episode:  155  -- score 4.0   -- average score 40.7  -- best score 79.0 epsilon 0.10755
+episode:  156  -- score 7.0   -- average score 40.3  -- best score 79.0 epsilon 0.10423
+episode:  157  -- score 7.0   -- average score 39.9  -- best score 79.0 epsilon 0.10103
+episode:  158  -- score 9.0   -- average score 39.5  -- best score 79.0 epsilon 0.09788
+sleep
+episode:  159  -- score 0.0   -- average score 39.0  -- best score 79.0 epsilon 0.09490
+episode:  160  -- score 2.0   -- average score 38.5  -- best score 79.0 epsilon 0.09195
+sleep
+episode:  161  -- score 7.0   -- average score 38.0  -- best score 79.0 epsilon 0.08909
+episode:  162  -- score 2.0   -- average score 37.6  -- best score 79.0 epsilon 0.08633
+episode:  163  -- score 3.0   -- average score 37.2  -- best score 79.0 epsilon 0.08369
+episode:  164  -- score 2.0   -- average score 36.7  -- best score 79.0 epsilon 0.08109
+episode:  165  -- score 3.0   -- average score 36.3  -- best score 79.0 epsilon 0.07859
+episode:  166  -- score 7.0   -- average score 35.8  -- best score 79.0 epsilon 0.07616
+episode:  167  -- score 2.0   -- average score 35.3  -- best score 79.0 epsilon 0.07379
+episode:  168  -- score 2.0   -- average score 34.7  -- best score 79.0 epsilon 0.07149
+episode:  169  -- score 2.0   -- average score 34.2  -- best score 79.0 epsilon 0.06930
+episode:  170  -- score 5.0   -- average score 33.7  -- best score 79.0 epsilon 0.06715
+episode:  171  -- score 3.0   -- average score 33.2  -- best score 79.0 epsilon 0.06510

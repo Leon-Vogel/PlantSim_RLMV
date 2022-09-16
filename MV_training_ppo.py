@@ -12,20 +12,26 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 # pfad = 'D:\\Studium\Projekt\Methodenvergleich\PlantSimulationRL\simulations'
 pfad = 'C:\\Users\leonv\Documents\Programmierungen_Studium\PlantSimulationRL\simulations'
 # model = pfad + '\Methodenvergleich_20220909_mitLager.spp'
-speicherort = 'tmp/MV_ppo_13'
+speicherort = 'tmp\MV_ppo_16'
 
-model = pfad + '\Methodenvergleich_20220914_real_mitTyp.spp'
+model = pfad + '\Methodenvergleich_20220916_Naiver_reward_wenig_states.spp'
+model = pfad + '\Methodenvergleich_20220915_Naiver_reward_wenig_states.spp'
+# model = pfad + '\Methodenvergleich_20220914_real_mitTyp.spp'
 # model = pfad + '\Methodenvergleich_20220913_real.spp'
 # model = pfad + '\Methodenvergleich_20220911_mitLager.spp'
 if __name__ == '__main__':
     plantsim = Plantsim(version='22.1', license_type='Educational', path_context='.Modelle.Modell', model=model,
-                        socket=None, visible=True)
+                        socket=None, visible=False)
     env = Environment(plantsim)  # env = gym.make('InvertedPendulumBulletEnv-v0')
     # Nachkommastelle an N anfügen, um das Lernen auszuschalten
-    N = 500000  # 30 to 5000 steps between training # or done [line 96]
+    N = 200  # 30 to 5000 steps between training # or done [line 96]
+    batch_size = 64  # 4 to 4096
+    n_epochs = 10  # 3 to 30 epochs in training
+    alpha = 0.0005  # 0.0003
+    '''N = 20000000  # 30 to 5000 steps between training # or done [line 96]
     batch_size = 128  # 4 to 4096
-    n_epochs = 15  # 3 to 30 epochs in training
-    alpha = 0.0003  # 0.0003
+    n_epochs = 5  # 3 to 30 epochs in training
+    alpha = 0.0003  # 0.0003'''
 
     actions = env.problem.get_all_actions()
     observation = env.reset()
@@ -37,15 +43,15 @@ if __name__ == '__main__':
                      n_actions=len(actions), batch_size=batch_size,
                      alpha=alpha, n_epochs=n_epochs, speicherort=speicherort)
 
-    max_iterations = 100
+    max_iterations = 200
     filename = 'PPO_training.png'
     figure_file = 'tmp/' + filename
-    best_score = 716 # 822 # 3932
+    best_score = -16  # 716 # 822 # 3932
     performance_train = []
     learn_iters = 0
     avg_score = 0
     n_steps = 0
-    load_checkpoint = True  # TrueFalse
+    load_checkpoint = True  # True False
     save_changes = True
 
     if load_checkpoint:
@@ -88,7 +94,7 @@ if __name__ == '__main__':
             done = env.problem.is_goal_state(current_state)
             if reward > 0 and not done:
                 count += reward
-            #print("Step " + str(step) + ": " + a + " - Reward: " + str(reward) + " - finished: " + str(
+            # print("Step " + str(step) + ": " + a + " - Reward: " + str(reward) + " - finished: " + str(
             #    count - 1) + "\n")  # + " - " + str(round((step / count), 3)) +
             n_steps += 1
             score += reward
@@ -96,21 +102,21 @@ if __name__ == '__main__':
             if n_steps % N == 0 or done:
                 print('---------learning--------')
                 agent.learn()
-                if done:
-                    agent.memory.clear_memory()
+                #if done:
+                    #agent.memory.clear_memory()
                 learn_iters += 1
             observation = observation_
             # print(observation)
 
         if done:
             performance_train.append(score)
-            avg_score = np.mean(performance_train[-2:])
+            avg_score = np.mean(performance_train[-100:])
 
-            with open("tmp\ppo_performance_train_13.txt", "w") as output:
+            with open("tmp\ppo_performance_train_16.txt", "w") as output:
                 output.write(str(performance_train))
 
-            if avg_score > best_score:
-                best_score = avg_score
+            if score > best_score:
+                best_score = score
                 if save_changes:
                     agent.save_models()
 
@@ -127,6 +133,10 @@ if __name__ == '__main__':
                 '//////////////////////////////////////////////////////////////////////////////////////////////////// \n '
                 '//////////////////////////////////////////////////////////////////////////////////////////////////// \n '
                 '//////////////////////////////////////////////////////////////////////////////////////////////////// \n ')
+
+        if done and i % 20 == 0:
+            x = [i + 1 for i in range(len(performance_train))]
+            plot_learning_curve(x, performance_train, figure_file)
 
     x = [i + 1 for i in range(len(performance_train))]
     plot_learning_curve(x, performance_train, figure_file)
