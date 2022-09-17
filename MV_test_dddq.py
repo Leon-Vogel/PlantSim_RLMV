@@ -23,30 +23,30 @@ if __name__ == '__main__':
     plantsim = Plantsim(version='22.1', license_type='Educational', path_context='.Modelle.Modell', model=model,
                         socket=None, visible=False)
     env = Environment(plantsim)
-    num_games = 600
-    load_checkpoint = False  # False True
+    num_games = 30
+    load_checkpoint = True  # False True
 
     actions = env.problem.get_all_actions()
     observation = env.reset()
     env.problem.plantsim.execute_simtalk("GetCurrentState")
     env.problem.get_current_state()
     test = env.problem.state
-    decay = (1+0.08)/(300*num_games)
+    decay = 0  # (1+0.08)/(300*num_games)
 
-    agent = Agent(gamma=0.99, epsilon=1.0, lr=0.0005,  # 5e-4,
-                  input_dims=[len(test)], n_actions=len(actions), mem_size=50000, eps_min=0.00001,
-                  batch_size=256, eps_dec=decay, replace=20,
-                  chkpt_dir='tmp/dddq/dueling_ddqn_very_naive_few_states_4')  # eps_dec=2e-5 eps_dec=0.99993
+    agent = Agent(gamma=0.99, epsilon=0.0, lr=0.0005,  # 5e-4,
+                  input_dims=[len(test)], n_actions=len(actions), mem_size=50000, eps_min=0.0,
+                  batch_size=64, eps_dec=decay, replace=20,
+                  chkpt_dir='tmp/dddq/dueling_ddqn_very_naive_few_states_2')  # eps_dec=2e-5 eps_dec=0.99993
 
     if load_checkpoint:
         agent.load_models()
 
-    filename = 'tmp\dddq\Dueling-DDQN-MV_17_wenig_states.png'
+    filename = 'tmp\dddq\Dueling-DDQN-MV_17_wenig_states_test.png'
     scores = []
     eps_history = []
     Lieferterminabweichung = []
     n_steps = 0
-    best_score = 50  # 107 # 420  # 271.424
+    best_score = 0  # 107 # 420  # 271.424
 
     for i in range(num_games):
         if i > 0:
@@ -75,15 +75,15 @@ if __name__ == '__main__':
             # print("Step " + str(step) + ": " + a + " - Reward: " + str(reward) + " - finished: " + str(
             #     count - 1) + "\n")  # + " - " + str(round((step / count), 3)) +
 
-            agent.store_transition(observation, action,
-                                   reward, observation_, int(done))
-            agent.learn()
+            # agent.store_transition(observation, action,
+            #                       reward, observation_, int(done))
+            # agent.learn()
 
             observation = observation_
         scores.append(score)
         avg_score = np.mean(scores[max(0, i - 100):(i + 1)])
-        if score > best_score and agent.epsilon < 0.9:
-            agent.save_models()
+        if score > best_score: #and agent.epsilon < 0.9:
+            #agent.save_models()
             best_score = score
 
         eps_history.append(agent.epsilon)
