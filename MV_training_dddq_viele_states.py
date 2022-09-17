@@ -17,37 +17,38 @@ pfad = 'C:\\Users\leonv\Documents\Programmierungen_Studium\PlantSimulationRL\sim
 # model = pfad + '\Methodenvergleich_20220913_real.spp'
 # model = pfad + '\Methodenvergleich_20220915_Naiver_reward_wenig_states.spp'
 # model = pfad + '\Methodenvergleich_20220915_Naiver_reward.spp'
-model = pfad + '\Methodenvergleich_20220916_Naiver_reward_wenig_states.spp'
+model = pfad + '\Methodenvergleich_20220917_real_mitTyp_viele_states.spp'
 
 if __name__ == '__main__':
     plantsim = Plantsim(version='22.1', license_type='Educational', path_context='.Modelle.Modell', model=model,
                         socket=None, visible=False)
     env = Environment(plantsim)
-    num_games = 400
-    load_checkpoint = True  # False True
+    num_games = 300
+    load_checkpoint = False  # False True
 
     actions = env.problem.get_all_actions()
     observation = env.reset()
     env.problem.plantsim.execute_simtalk("GetCurrentState")
     env.problem.get_current_state()
     test = env.problem.state
-    epsilon = 0.5
+    epsilon = 1
     decay = (epsilon+0.2*epsilon)/(300*num_games)
 
     agent = Agent(gamma=0.99, epsilon=epsilon, lr=0.0005,  # 5e-4,
                   input_dims=[len(test)], n_actions=len(actions), mem_size=50000, eps_min=0.00001,
-                  batch_size=64, eps_dec=decay, replace=40,
-                  chkpt_dir='tmp/dddq/dueling_ddqn_very_naive_few_states_4')  # eps_dec=2e-5 eps_dec=0.99993
+                  batch_size=64, eps_dec=decay, replace=30,
+                  chkpt_dir='tmp/dddq_viele_states/dueling_ddqn_viele_states',
+                  l1=256, l2=128, l3=64)  # eps_dec=2e-5 eps_dec=0.99993
 
     if load_checkpoint:
         agent.load_models()
 
-    filename = 'tmp\dddq\Dueling-DDQN-MV_17_wenig_states.png'
+    filename = 'tmp\dddq_viele_states\Dueling-DDQN-MV_17_viele_states.png'
     scores = []
     eps_history = []
     Lieferterminabweichung = []
     n_steps = 0
-    best_score = 50  # 107 # 420  # 271.424
+    best_score = 0  # 107 # 420  # 271.424
 
     for i in range(num_games):
         if i > 0:
@@ -94,6 +95,16 @@ if __name__ == '__main__':
               'epsilon %.5f' % agent.epsilon)
         # if i > 0 and i % 10 == 0:
         Lieferterminabweichung.append(env.problem.plantsim.get_value('Verspätung'))
+
+        if i % 16 == 0:
+            x = [i + 1 for i in range(num_games)]
+            plotLearning(x, scores, eps_history, filename)
+            with open("tmp\dddq\dddq_performance_train_17_scores.txt", "w") as output:
+                output.write(str(scores))
+            with open("tmp\dddq\dddq_performance_train_17_epsilon.txt", "w") as output:
+                output.write(str(eps_history))
+            with open("tmp\dddq\dddq_performance_train_17_verspaetung.txt", "w") as output:
+                output.write(str(Lieferterminabweichung))
 
     x = [i + 1 for i in range(num_games)]
     plotLearning(x, scores, eps_history, filename)

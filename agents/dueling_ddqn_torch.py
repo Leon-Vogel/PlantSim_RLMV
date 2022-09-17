@@ -41,15 +41,20 @@ class ReplayBuffer():
 
 
 class DuelingDeepQNetwork(nn.Module):
-    def __init__(self, lr, n_actions, name, input_dims, chkpt_dir):
+    def __init__(self, lr, n_actions, name, input_dims, chkpt_dir, l1=64, l2=64, l3=None):
         super(DuelingDeepQNetwork, self).__init__()
         self.checkpoint_dir = chkpt_dir
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name)
 
-        self.fc1 = nn.Linear(*input_dims, 64)  # 64
-        self.fc2 = nn.Linear(64, 64)
-        self.V = nn.Linear(64, 1)
-        self.A = nn.Linear(64, n_actions)
+        self.fc1 = nn.Linear(*input_dims, l1)  # 64
+        self.fc2 = nn.Linear(l1, l2)
+        if l3 is not None:
+            self.fc3 = nn.Linear(l2, l3)
+            self.V = nn.Linear(l3, 1)
+            self.A = nn.Linear(l3, n_actions)
+        else:
+            self.V = nn.Linear(l2, 1)
+            self.A = nn.Linear(l2, n_actions)
 
         self.optimizer = optim.Adam(self.parameters(), lr=lr)
         self.loss = nn.MSELoss()
@@ -61,7 +66,14 @@ class DuelingDeepQNetwork(nn.Module):
         flat2 = F.relu(self.fc2(flat1))
         V = self.V(flat2)
         A = self.A(flat2)
+        return V, A
 
+    def forward_deep(self, state):
+        flat1 = F.relu(self.fc1(state))
+        flat2 = F.relu(self.fc2(flat1))
+        flat3 = F.relu(self.fc3(flat2))
+        V = self.V(flat3)
+        A = self.A(flat3)
         return V, A
 
     def save_checkpoint(self):
@@ -76,7 +88,7 @@ class DuelingDeepQNetwork(nn.Module):
 class Agent():
     def __init__(self, gamma, epsilon, lr, n_actions, input_dims,
                  mem_size, batch_size, eps_min=0.01, eps_dec=5e-7,
-                 replace=1000, chkpt_dir='tmp/dueling_ddqn'):
+                 replace=1000, chkpt_dir='tmp/dueling_ddqn', l1=64, l2=64, l3=None):
         self.gamma = gamma
         self.epsilon = epsilon
         self.lr = lr
@@ -98,17 +110,19 @@ class Agent():
         self.q_eval = DuelingDeepQNetwork(self.lr, self.n_actions,
                                           input_dims=self.input_dims,
                                           name='MV_dueling_ddqn_q_eval',
-                                          chkpt_dir=self.chkpt_dir)
+                                          chkpt_dir=self.chkpt_dir,
+                                          l1=l1, l2=l2, l3=l3)
 
         self.q_next = DuelingDeepQNetwork(self.lr, self.n_actions,
                                           input_dims=self.input_dims,
                                           name='MV_dueling_ddqn_q_next',
-                                          chkpt_dir=self.chkpt_dir)
+                                          chkpt_dir=self.chkpt_dir,
+                                          l1=l1, l2=l2, l3=l3)
 
     def choose_action(self, observation):
         if np.random.random() >= self.epsilon:
             state = T.tensor([observation], dtype=T.float).to(self.q_eval.device)
-            _, advantage = self.q_eval.forward(state)
+            _, advantage = self.q_eval.forward_deep(state)
             action = T.argmax(advantage).item()
             #print("Not random")
         else:
@@ -163,10 +177,10 @@ class Agent():
 
         indices = np.arange(self.batch_size)
 
-        V_s, A_s = self.q_eval.forward(states)
-        V_s_, A_s_ = self.q_next.forward(states_)
+        V_s, A_s = self.q_eval.forward_deep(states) #forward
+        V_s_, A_s_ = self.q_next.forward_deep(states_) #forward
 
-        V_s_eval, A_s_eval = self.q_eval.forward(states_)
+        V_s_eval, A_s_eval = self.q_eval.forward_deep(states_) #forward
 
         q_pred = T.add(V_s,
                        (A_s - A_s.mean(dim=1, keepdim=True)))[indices, actions]
