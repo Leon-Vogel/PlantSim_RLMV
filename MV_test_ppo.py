@@ -44,8 +44,8 @@ if __name__ == '__main__':
                      n_actions=len(actions), batch_size=batch_size,
                      alpha=alpha, n_epochs=n_epochs, speicherort=speicherort)
 
-    max_iterations = 1000
-    filename = 'PPO_training_20220917.png'
+    max_iterations = 20
+    filename = 'PPO_test_20220917.png'
     figure_file = 'tmp/ppo/' + filename
     best_score = 310  # 716 # 822 # 3932
     performance_train = []
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     avg_score = 0
     n_steps = 0
     load_checkpoint = True  # True False
-    save_changes = True
+    save_changes = False
 
     if load_checkpoint:
         agent.load_models()
@@ -100,13 +100,13 @@ if __name__ == '__main__':
             #    count - 1) + "\n")  # + " - " + str(round((step / count), 3)) +
             n_steps += 1
             score += reward
-            agent.remember(observation, action, prob, val, reward, done)
-            if n_steps % N == 0 or done:
-                print('---------learning--------')
-                agent.learn()
+            #agent.remember(observation, action, prob, val, reward, done)
+            #if n_steps % N == 0 or done:
+            #    print('---------learning--------')
+            #    agent.learn()
                 #if done:
                     #agent.memory.clear_memory()
-                learn_iters += 1
+            #    learn_iters += 1
             observation = observation_
             # print(observation)
 
@@ -115,9 +115,9 @@ if __name__ == '__main__':
             performance_train.append(score)
             avg_score = np.mean(performance_train[-100:])
 
-            with open("tmp\ppo\ppo_performance_train_17.txt", "w") as output:
+            with open("tmp\ppo\ppo_performance_test_17.txt", "w") as output:
                 output.write(str(performance_train))
-            with open("tmp\ppo\ppo_performance_train_17_verspaetung.txt", "w") as output:
+            with open("tmp\ppo\ppo_performance_test_17_verspaetung.txt", "w") as output:
                 output.write(str(Lieferterminabweichung))
 
             if score > best_score:
