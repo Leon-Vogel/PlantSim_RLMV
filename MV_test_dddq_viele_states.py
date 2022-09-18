@@ -13,17 +13,14 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 pfad = 'C:\\Users\leonv\Documents\Programmierungen_Studium\PlantSimulationRL\simulations'
 # pfad = 'D:\\Studium\Projekt\Methodenvergleich\PlantSimulationRL\simulations'
 
-# model = pfad + '\Methodenvergleich_20220911_mitLager.spp'
-# model = pfad + '\Methodenvergleich_20220913_real.spp'
-# model = pfad + '\Methodenvergleich_20220915_Naiver_reward_wenig_states.spp'
-# model = pfad + '\Methodenvergleich_20220915_Naiver_reward.spp'
+
 model = pfad + '\Methodenvergleich_20220917_real_mitTyp_viele_states.spp'
 
 if __name__ == '__main__':
     plantsim = Plantsim(version='22.1', license_type='Educational', path_context='.Modelle.Modell', model=model,
-                        socket=None, visible=False)
+                        socket=None, visible=True)
     env = Environment(plantsim)
-    num_games = 300
+    num_games = 10
     load_checkpoint = True  # False True
 
     actions = env.problem.get_all_actions()
@@ -31,24 +28,23 @@ if __name__ == '__main__':
     env.problem.plantsim.execute_simtalk("GetCurrentState")
     env.problem.get_current_state()
     test = env.problem.state
-    epsilon = 0.5
-    decay = (epsilon+0.0*epsilon)/(2*300*num_games)
+    decay = 0  # (1+0.08)/(300*num_games)
 
-    agent = Agent(gamma=0.99, epsilon=epsilon, lr=0.0005,  # 5e-4,
-                  input_dims=[len(test)], n_actions=len(actions), mem_size=10000, eps_min=0.005,
-                  batch_size=256, eps_dec=decay, replace=50,
+    agent = Agent(gamma=0.99, epsilon=0.0, lr=0.0005,  # 5e-4,
+                  input_dims=[len(test)], n_actions=len(actions), mem_size=50000, eps_min=0.0,
+                  batch_size=64, eps_dec=decay, replace=20,
                   chkpt_dir='tmp/dddq_viele_states/dueling_ddqn_viele_states_18',
-                  l1=256, l2=128, l3=64)  # eps_dec=2e-5 eps_dec=0.99993
+                  l1=256, l2=128, l3=64) # eps_dec=2e-5 eps_dec=0.99993
 
     if load_checkpoint:
         agent.load_models()
 
-    filename = 'tmp\dddq_viele_states\Dueling-DDQN-MV_18_viele_states.png'
+    filename = 'tmp\dddq_viele_states\Dueling-DDQN-MV_18_viele_states_test.png'
     scores = []
     eps_history = []
     Lieferterminabweichung = []
     n_steps = 0
-    best_score = 271.8  # 107 # 420  # 271.424
+    best_score = 0  # 107 # 420  # 271.424
 
     for i in range(num_games):
         if i > 0:
@@ -70,22 +66,22 @@ if __name__ == '__main__':
             current_state = env.problem.get_current_state()
             observation_ = current_state.to_state()
             reward = env.problem.get_reward(current_state)
-            # if reward > 0 and not done:
-            #     count += 1
+            #if reward > 0 and not done:
+            #    count += 1
             score += reward
             done = env.problem.is_goal_state(current_state)
             # print("Step " + str(step) + ": " + a + " - Reward: " + str(reward) + " - finished: " + str(
             #     count - 1) + "\n")  # + " - " + str(round((step / count), 3)) +
 
-            agent.store_transition(observation, action,
-                                   reward, observation_, int(done))
-            agent.learn()
+            # agent.store_transition(observation, action,
+            #                       reward, observation_, int(done))
+            # agent.learn()
 
             observation = observation_
         scores.append(score)
         avg_score = np.mean(scores[max(0, i - 100):(i + 1)])
-        if score > best_score and agent.epsilon < 0.9:
-            agent.save_models()
+        if score > best_score: #and agent.epsilon < 0.9:
+            #agent.save_models()
             best_score = score
 
         eps_history.append(agent.epsilon)
@@ -96,20 +92,11 @@ if __name__ == '__main__':
         # if i > 0 and i % 10 == 0:
         Lieferterminabweichung.append(env.problem.plantsim.get_value('Verspätung'))
 
-        if i % 16 == 0:
-
-            with open("tmp\dddq_viele_states\dddq_performance_train_18_scores.txt", "w") as output:
-                output.write(str(scores))
-            with open("tmp\dddq_viele_states\dddq_performance_train_18_epsilon.txt", "w") as output:
-                output.write(str(eps_history))
-            with open("tmp\dddq_viele_states\dddq_performance_train_18_verspaetung.txt", "w") as output:
-                output.write(str(Lieferterminabweichung))
-
     x = [i + 1 for i in range(num_games)]
     plotLearning(x, scores, eps_history, filename)
-    with open("tmp\dddq_viele_states\dddq_performance_train_18_scores.txt", "w") as output:
+    with open("tmp\dddq_viele_states\dddq_performance_test_18_scores.txt", "w") as output:
         output.write(str(scores))
-    with open("tmp\dddq_viele_states\dddq_performance_train_18_epsilon.txt", "w") as output:
+    with open("tmp\dddq_viele_states\dddq_performance_test_18_epsilon.txt", "w") as output:
         output.write(str(eps_history))
-    with open("tmp\dddq_viele_states\dddq_performance_train_18_verspaetung.txt", "w") as output:
+    with open("tmp\dddq_viele_states\dddq_performance_test_18_verspaetung.txt", "w") as output:
         output.write(str(Lieferterminabweichung))
