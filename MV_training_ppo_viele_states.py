@@ -13,7 +13,7 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 # pfad = 'C:\\Users\leonv\Documents\Programmierungen_Studium\PlantSimulationRL\simulations'
 pfad = 'C:\\Users\leonv\Documents\Methodenvergleich\simulations'
 # model = pfad + '\Methodenvergleich_20220909_mitLager.spp'
-speicherort = 'tmp\ppo\MV_ppo_18'
+speicherort = 'tmp\ppo_viele_states\MV_ppo_18'
 
 model = pfad + '\Methodenvergleich_20220917_real_mitTyp_viele_states.spp'
 #model = pfad + '\Methodenvergleich_20220916_Naiver_reward_wenig_states.spp'
@@ -27,9 +27,9 @@ if __name__ == '__main__':
     env = Environment(plantsim)  # env = gym.make('InvertedPendulumBulletEnv-v0')
     # Nachkommastelle an N anfügen, um das Lernen auszuschalten
     N = 1500000000  # 30 to 5000 steps between training # or done [line 96]
-    batch_size = 70  # 4 to 4096
-    n_epochs = 4  # 3 to 30 epochs in training
-    alpha = 0.0003  # 0.0003
+    batch_size = 64  # 4 to 4096
+    n_epochs = 5  # 3 to 30 epochs in training
+    alpha = 0.0005  # 0.0003
     '''N = 20000000  # 30 to 5000 steps between training # or done [line 96]
     batch_size = 128  # 4 to 4096
     n_epochs = 5  # 3 to 30 epochs in training
@@ -45,10 +45,10 @@ if __name__ == '__main__':
                      n_actions=len(actions), batch_size=batch_size,
                      alpha=alpha, n_epochs=n_epochs, speicherort=speicherort)
 
-    max_iterations = 250
+    max_iterations = 300
     filename = 'PPO_training_20220917.png'
     figure_file = 'tmp/ppo_viele_states/' + filename
-    best_score = 162.8  # 716 # 822 # 3932
+    best_score = 192.0  # 716 # 822 # 3932
     performance_train = []
     Lieferterminabweichung = []
     learn_iters = 0
@@ -116,13 +116,13 @@ if __name__ == '__main__':
             performance_train.append(score)
             avg_score = np.mean(performance_train[-100:])
 
-            with open("tmp\ppo_viele_states\ppo_performance_train_17.txt", "w") as output:
+            with open("tmp\ppo_viele_states\ppo_performance_train_18.txt", "w") as output:
                 output.write(str(performance_train))
-            with open("tmp\ppo_viele_states\ppo_performance_train_17_verspaetung.txt", "w") as output:
+            with open("tmp\ppo_viele_states\ppo_performance_train_18_verspaetung.txt", "w") as output:
                 output.write(str(Lieferterminabweichung))
 
-            if np.mean(performance_train[-3:]) > best_score:
-                best_score = np.mean(performance_train[-3:])
+            if np.mean(performance_train[-1:]) > best_score:
+                best_score = np.mean(performance_train[-1:])
                 if save_changes:
                     agent.save_models()
 
