@@ -59,7 +59,7 @@ class PPOMemory:
 
 
 class ActorNetwork(nn.Module):
-    def __init__(self, n_actions, input_dims, alpha,
+    def __init__(self, n_actions, input_dims, alpha, fc0_dims=256,
                  fc1_dims=128, fc2_dims=64, location='tmp/ppo'): # Standard sind 2 * 60 Neuronen
         super(ActorNetwork, self).__init__()
 
@@ -67,7 +67,9 @@ class ActorNetwork(nn.Module):
             os.makedirs(location)
         self.checkpoint_file = os.path.join(location, 'actor_torch_ppo')
         self.actor = nn.Sequential(
-            nn.Linear(*input_dims, fc1_dims),
+            nn.Linear(*input_dims, fc0_dims),
+            nn.ReLU(),
+            nn.Linear(fc0_dims, fc1_dims),
             nn.ReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.ReLU(),
@@ -93,14 +95,16 @@ class ActorNetwork(nn.Module):
 
 
 class CriticNetwork(nn.Module):
-    def __init__(self, input_dims, alpha, fc1_dims=128, fc2_dims=64, location='tmp/ppo'):# Standard sind 2 * 60 Neuronen
+    def __init__(self, input_dims, alpha, fc0_dims=256, fc1_dims=128, fc2_dims=64, location='tmp/ppo_viele_states'):# Standard sind 2 * 60 Neuronen
         super(CriticNetwork, self).__init__()
 
         if not os.path.exists(location):
             os.makedirs(location)
         self.checkpoint_file = os.path.join(location, 'critic_torch_ppo')
         self.critic = nn.Sequential(
-            nn.Linear(*input_dims, fc1_dims),
+            nn.Linear(*input_dims, fc0_dims),
+            nn.ReLU(),
+            nn.Linear(fc0_dims, fc1_dims),
             nn.ReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.ReLU(),
@@ -125,7 +129,7 @@ class CriticNetwork(nn.Module):
 
 class PPOAgent:
     def __init__(self, n_actions, input_dims, env=None, gamma=0.99, alpha=0.0003, gae_lambda=0.95,
-                 policy_clip=0.2, batch_size=64, n_epochs=10, speicherort='tmp/ppo'):
+                 policy_clip=0.1, batch_size=64, n_epochs=10, speicherort='tmp/ppo'):
         self.gamma = gamma
         self.policy_clip = policy_clip
         self.n_epochs = n_epochs
