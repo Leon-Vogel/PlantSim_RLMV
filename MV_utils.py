@@ -4,6 +4,7 @@ import json
 # plt.style.use('science')
 
 
+
 def plotLearning(x, scores, epsilons, filename, lines=None):
     with plt.style.context(['science', 'ieee']):
         fig = plt.figure()
