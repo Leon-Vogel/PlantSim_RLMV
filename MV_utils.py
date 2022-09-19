@@ -13,8 +13,13 @@ def plotLearning(x, scores, epsilons, filename, lines=None):
         ax.plot(x, epsilons, c='gray')
         ax.set_xlabel('Episode')
         ax.set_ylabel('Epsilon')
-        ax.tick_params(right=False)
+        ax.yaxis.set_ticks_position('left')
+        ax.xaxis.set_ticks_position('bottom')
+        #ax.tick_params(right=False)
+        #ax.tick_params(top=False)
+        ax.set_yticks(np.arange(0.2, 0.6, 0.1))
         # ax.tick_params(axis='y')
+        ax.spines.top.set_visible(True)
 
         N = len(scores)
         running_avg = np.empty(N)
@@ -26,12 +31,19 @@ def plotLearning(x, scores, epsilons, filename, lines=None):
         ax2.yaxis.tick_right()
         ax2.set_ylabel('Score')
         ax2.yaxis.set_label_position('right')
-        # ax2.tick_params(axis='y')
+        ax2.yaxis.set_ticks_position('right')
+        ax2.xaxis.set_ticks_position('bottom')
+        #ax2.tick_params(right=False)
+        ax2.spines.top.set_visible(False)
+        #ax2.set_yticks(np.arange(100, 300, 50))
+        #ax2.tick_params(top=False)
 
+        # ax2.tick_params(axis='y')
+        #plt.tick_params(top=False)
         plt.savefig(filename+'.pdf')
         plt.savefig(filename+'.jpg', dpi=300)
 
-        plt.show()
+        #  plt.show()
 
 
 pfad = 'tmp\dddq_viele_states'
